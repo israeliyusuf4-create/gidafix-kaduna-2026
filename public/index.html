@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="GidaFix — SMS-powered repair reporting for tenants and landlords"/>
+  <title>GidaFix | Housing issues, handled.</title>
+  <link rel="icon" type="image/svg+xml" href="/logo.svg"/>
+  <link rel="stylesheet" href="/styles.css"/>
+  <script src="/app.js" defer></script>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><img src="/logo.svg" alt="GidaFix icon"/><div><strong>Gida<span>Fix</span></strong><small>Property care, connected.</small></div></div>
+    <div class="side-heading">WORKSPACE</div>
+    <nav aria-label="Main navigation">
+      <button class="nav-item active" data-tab="overview"><span class="nav-icon">◫</span> Overview</button>
+      <button class="nav-item" data-tab="tickets"><span class="nav-icon">▤</span> Repair tickets</button>
+      <button class="nav-item" data-tab="units"><span class="nav-icon">⌂</span> Units & tenants</button>
+      <button class="nav-item" data-tab="messages"><span class="nav-icon">✉</span> SMS activity</button>
+    </nav>
+    <div class="sidebar-bottom"><div class="side-note"><span class="tiny-dot"></span><span>Built for real communities, designed for any phone.</span></div><small>Africa's Talking PropTech · Kaduna 2026</small></div>
+  </aside>
+  <main class="content">
+    <div class="topbar"><div><span class="eyebrow">LANDLORD & CARETAKER WORKSPACE</span><h1 id="page-title">Good morning <span class="wave">✳</span></h1></div><div class="top-actions"><span class="pill" id="mode-pill">Connecting...</span><button class="btn btn-secondary" id="add-unit">+ Add unit</button><button class="btn btn-dark" id="new-sms">↗ Simulate SMS</button></div></div>
+    <div class="body-main">
+      <section id="panel-overview" class="panel active">
+        <div class="hero"><div class="hero-copy"><div class="hero-kicker"><span class="dot-bright"></span> HASSLE-FREE PROPERTY CARE</div><h2>Every housing issue<br/><em>deserves an answer.</em></h2><p>Tenants report repairs by SMS. You track, respond and resolve them from one simple workspace.</p><button class="btn btn-hero" id="hero-simulate">Try a tenant report <span>↗</span></button></div><div class="hero-art"><div class="chat chat-a"><div class="chat-bubble-tag">TENANT · SMS</div>FIX KAD101 roof leaking</div><div class="chat-line"></div><div class="chat chat-b"><div class="chat-bubble-tag">GIDAFIX · AUTO RESPONSE</div>Report GF-0004 received. Manager notified. ✓</div><div class="hero-icon">⌂</div></div></div>
+        <div class="section-title"><div><h3>At a glance</h3><p>A clear view of what needs your attention.</p></div><span class="section-caption">LIVE WORKSPACE DATA</span></div>
+        <div class="metrics"><article class="metric"><span class="metric-icon green">▤</span><div class="metric-label">Total reports</div><div class="metric-value" id="metric-total">—</div><small>Across all registered units</small></article><article class="metric"><span class="metric-icon orange">◷</span><div class="metric-label">Awaiting action</div><div class="metric-value" id="metric-open">—</div><small>Need a landlord response</small></article><article class="metric"><span class="metric-icon blue">↗</span><div class="metric-label">In progress</div><div class="metric-value" id="metric-progress">—</div><small>Work being attended to</small></article><article class="metric"><span class="metric-icon purple">✓</span><div class="metric-label">Resolved</div><div class="metric-value" id="metric-resolved">—</div><small>Marked completed</small></article></div>
+        <div class="two-col"><section class="surface"><div class="surface-head"><div><h3>Recent repair reports</h3><p>The latest issues reported by tenants</p></div><button class="text-button" data-tab="tickets">View all ↗</button></div><div id="overview-tickets" class="ticket-list"></div></section><section class="surface demo-card"><div class="surface-head"><div><h3>How it works</h3><p>One simple loop, from any phone</p></div></div><div class="steps"><div class="step"><span>01</span><div><strong>Tenant sends an SMS</strong><p>FIX KAD101 roof leaking</p></div></div><div class="step"><span>02</span><div><strong>GidaFix creates a ticket</strong><p>Both sides get an update</p></div></div><div class="step"><span>03</span><div><strong>Landlord acts</strong><p>Update progress in the dashboard</p></div></div><div class="step"><span>04</span><div><strong>Tenant stays informed</strong><p>SMS confirms every change</p></div></div></div><div class="callout">📲 <span>Works with basic phones. No app or mobile data needed for tenants.</span></div></section></div>
+      </section>
+      <section id="panel-tickets" class="panel"><div class="section-title"><div><h3>Repair tickets</h3><p>See every complaint and act on it with a single update.</p></div><div class="filters" id="filters"><button class="filter active" data-filter="all">All</button><button class="filter" data-filter="open">Open</button><button class="filter" data-filter="in_progress">In progress</button><button class="filter" data-filter="resolved">Resolved</button></div></div><div class="surface"><div class="table-scroll"><table class="data-table"><thead><tr><th>Ticket</th><th>Property unit</th><th>Issue reported</th><th>Status</th><th>Reported</th><th>Update</th></tr></thead><tbody id="ticket-rows"></tbody></table></div></div><p class="table-note">Changing a ticket status triggers an Africa's Talking message (or a simulated message in mock mode) to its registered tenant.</p></section>
+      <section id="panel-units" class="panel"><div class="section-title"><div><h3>Units & tenants</h3><p>Register tenant phone numbers so only authorised occupants can report issues for their unit.</p></div><button class="btn btn-dark" id="units-add">+ Register a unit</button></div><div class="unit-grid" id="unit-cards"></div></section>
+      <section id="panel-messages" class="panel"><div class="section-title"><div><h3>SMS activity</h3><p>View system-generated messages and their submission state.</p></div><span class="section-caption">PROVIDER ACCEPTANCE IS NOT DELIVERY</span></div><div class="surface"><div class="table-scroll"><table class="data-table"><thead><tr><th>Sent at</th><th>Recipient</th><th>Message</th><th>State</th></tr></thead><tbody id="message-rows"></tbody></table></div></div><p class="table-note">“Simulated” means no SMS was sent. “Accepted by provider” means the API accepted the request, not that the handset received it.</p></section>
+      <footer><span>GidaFix © 2026 · Built for Africa's Talking PropTech Hackathon</span><span>Demo contacts are fictional. No rent or payment data is collected.</span></footer>
+    </div>
+  </main>
+</div>
+<div class="modal-backdrop hidden" id="modal-layer" role="presentation"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modal-head"><div><span class="eyebrow" id="modal-kicker">GIDAFIX</span><h2 id="modal-title">New request</h2></div><button class="icon-button" id="close-modal" aria-label="Close dialog">✕</button></div><div id="modal-content"></div></div></div>
+<div class="toast hidden" id="toast" role="status"></div>
+</body>
+</html>
